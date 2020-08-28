@@ -28,7 +28,7 @@ createComment = (comment) =>  {
 
 findComment = (id) => {
     return new Promise ((resolve, reject) => {
-        db.findOne({ _id: id }, function (err, docs) {
+        db.find({ postId: id }, function (err, docs) {
             if (err) {
                 res.send('Someting went wrong!');
             } else {
@@ -40,7 +40,7 @@ findComment = (id) => {
 
 updatedComment = (id, body) => {
     return new Promise ((resolve, reject) => {
-        db.update({ _id: id }, { $set: {content: body.content} }, { multi: true }, function (err, numReplaced) {
+        db.update({ _postsId: postsId }, { $set: {content: body.content} }, { multi: true }, function (err, numReplaced) {
             if (err) {
                 res.send('Someting went wrong!');
             } else {

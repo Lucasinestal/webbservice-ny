@@ -8,7 +8,7 @@ findAllComments = async (req, res) => {
 
 createNewComment = async (req, res) => {
     let comment = {
-        _id: req.params.id,
+        postId: req.params.id,
         content: req.body.content
     }
     const createdComment = await model.createComment(comment)
@@ -22,10 +22,10 @@ findCommentById = async (req, res) => {
 }
 
 updateComment = async (req, res) => {
-    let id = req.params.id
+    let postId = req.params.id
     let body = req.body
     console.log(body.content)
-    const updatedComment = await model.updatedComment(id, body)
+    const updatedComment = await model.updatedComment(postId, body)
     res.send(updatedComment)
 }
 
