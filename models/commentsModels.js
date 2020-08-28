@@ -1,12 +1,10 @@
-//const controller = require("../controllers/commentsControllers")
-
 const Datastore = require('nedb'), db = new Datastore({filename: 'comments.db', autoload: true});
 
 getComments = () => {
     return new Promise((resolve, reject) => {
         db.find({}, function (err, docs) {
             if (err) {
-                res.send('Someting went wrong!');
+                reject(err);
             } else {
                 resolve(docs);
             }
@@ -26,11 +24,11 @@ createComment = (comment) =>  {
 }
 
 
-findComment = (id) => {
+findComment = (postId) => {
     return new Promise ((resolve, reject) => {
-        db.find({ postId: id }, function (err, docs) {
+        db.find({ postId: postId }, function (err, docs) {
             if (err) {
-                res.send('Someting went wrong!');
+                reject(err);
             } else {
                 resolve(docs);
             }

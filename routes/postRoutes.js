@@ -8,27 +8,27 @@ var jsonParser = bodyParser.json();
 
 // post routes
 
-router.get('/', jsonParser, postsController.findAllPosts);
+router.get('/posts', jsonParser, postsController.findAllPosts);
 
-router.get("/post/:id", jsonParser, postsController.findPostById);
+router.get("/posts/:id", jsonParser, postsController.findPostById);
 
-router.post("/edit/:id", jsonParser, postsController.updatePost);
+router.post("posts/:id/edit", jsonParser, postsController.updatePost);
 
-router.post("/create", jsonParser, postsController.createNewPost);
+router.post("posts/create", jsonParser, postsController.createNewPost);
 
-router.post("/delete/:id", jsonParser, postsController.deletePost);
+router.post("/posts/:id/delete", jsonParser, postsController.deletePost);
 
 // comment routes
 
-router.get('/posts/comments', jsonParser, commentsController.findAllComments);
+router.get('/comments', jsonParser, commentsController.findAllComments);
 
-router.get("/posts/:id/comments", jsonParser, commentsController.findCommentById);
+router.get("/posts/comments/:id", jsonParser, commentsController.findCommentById);
 
-router.post("/edit/:id/comment", jsonParser, commentsController.updateComment);
+router.post("/posts/comments/:id/edit", jsonParser, commentsController.updateComment);
 
-router.post("/create/:id/comment", jsonParser, commentsController.createNewComment);
+router.post("/posts/comment/:id/create", jsonParser, commentsController.createNewComment);
 
-router.post("/delete/:id/comment", jsonParser, commentsController.deleteComment);
+router.post("/posts/comment/:id/delete", jsonParser, commentsController.deleteComment);
 
 
 

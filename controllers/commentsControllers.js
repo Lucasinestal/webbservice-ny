@@ -3,6 +3,7 @@ const model = require("../models/commentsModels")
 findAllComments = async (req, res) => {
    const comments = await model.getComments()
     res.send(comments)
+    console.log(comments)
     }
 
 
@@ -16,8 +17,8 @@ createNewComment = async (req, res) => {
 }
 
 findCommentById = async (req, res) => {
-    let id = req.params.id
-    const findComment = await model.findComment(id)
+    let postId = req.params.id
+    const findComment = await model.findComment(postId)
     res.send(findComment)
 }
 
