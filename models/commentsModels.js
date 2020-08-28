@@ -1,6 +1,8 @@
-const Datastore = require('nedb'), db = new Datastore({filename: 'posts.db', autoload: true});
+//const controller = require("../controllers/commentsControllers")
 
-findAll = () => {
+const Datastore = require('nedb'), db = new Datastore({filename: 'comments.db', autoload: true});
+
+getComments = () => {
     return new Promise((resolve, reject) => {
         db.find({}, function (err, docs) {
             if (err) {
@@ -11,11 +13,11 @@ findAll = () => {
         });
     })
 }
-createPost = (post) =>  {
+createComment = (comment) =>  {
     return new Promise((resolve, reject) => {
-        db.insert(post, function (err, docs) {
+        db.insert(comment, function (err, docs) {
             if (err) {
-                res.send('Someting went wrong!');
+                reject(err);
             } else {
                 resolve(docs)    
             }
@@ -23,7 +25,8 @@ createPost = (post) =>  {
     })   
 }
 
-findPost = (id) => {
+
+findComment = (id) => {
     return new Promise ((resolve, reject) => {
         db.findOne({ _id: id }, function (err, docs) {
             if (err) {
@@ -35,9 +38,9 @@ findPost = (id) => {
     })
 }
 
-updatedPost = (id, body) => {
+updatedComment = (id, body) => {
     return new Promise ((resolve, reject) => {
-        db.update({ _id: id }, { $set: { title: body.title, content: body.content, comment: body.comment } }, { multi: true }, function (err, numReplaced) {
+        db.update({ _id: id }, { $set: {content: body.content} }, { multi: true }, function (err, numReplaced) {
             if (err) {
                 res.send('Someting went wrong!');
             } else {
@@ -49,7 +52,7 @@ updatedPost = (id, body) => {
     })
 }
 
-deletedPost = (id) => {
+deletedComment = (id) => {
     return new Promise((resolve, reject) => {
         db.remove({ _id: id }, function (err, numDeleted) {
             if (err) {
@@ -60,5 +63,4 @@ deletedPost = (id) => {
     });
 })
 }
-module.exports = { findAll, createPost, findPost, updatedPost, deletedPost }
-
+module.exports = { getComments, createComment, findComment, updatedComment, deletedComment }
